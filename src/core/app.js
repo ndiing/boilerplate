@@ -1,15 +1,11 @@
-const express = require("express");
-const helmet = require("helmet");
-const cors = require("cors");
+const App = require("@ndiinginc/router");
+const { json } = require("@ndiinginc/router/src/middleware.js");
 const { notFoundHandler } = require("./not-found-handler.js");
 const { errorHandler } = require("./error-handler.js");
 const { loadModules } = require("./load-modules.js");
 
-const app = express();
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded());
+const app = new App();
+app.use(json());
 loadModules(app);
 app.use(notFoundHandler());
 app.use(errorHandler());

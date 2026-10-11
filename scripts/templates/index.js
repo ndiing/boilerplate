@@ -5,10 +5,10 @@ function transformMethod(method) {
 }
 
 /**@param {import("../module").ParseResult} parsed*/
-module.exports = (parsed) => /* prettier-ignore */ template`const express = require("express");
+module.exports = (parsed) => /* prettier-ignore */ template`const {Router} = require("@ndiinginc/router/src/router.js");
 const controller = require("./controller.js");
 
-const router = express.Router();
+const router = new Router();
 ${template`
 ${parsed.requests?.filter(req=>!req.isDuplicate)?.map(req=>`router.${transformMethod(req.method)}("/:sessionId${req.pathname}", controller.${req.methodName});`)}
 `}

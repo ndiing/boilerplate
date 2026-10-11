@@ -24,7 +24,7 @@ const cli = {
         generate: async (params = {}) => {
             await review.generate({
                 //
-                dir: path.resolve(),
+                dir: path.resolve("../router"),
                 excludes: [
                     // RegExp
                     /\.git/,
@@ -37,20 +37,23 @@ const cli = {
                     /bin/,
                     /.*\.db/,
                     /fixtures/,
-                    // /migrations/,
+                    /migrations/,
                     /nodemon\.json/,
-                    /package(-lock)?.json/,
+                    /package\.json/,
+                    /package-lock\.json/,
                     /rest/,
                     /scripts\\review\.js/,
                     /dist/,
-                    /out/,
-                    /temp\//,
-                    // /tests/,
+                    /\\out/,
+                    /\\temp/,
+                    // /\\tests/,
                 ],
                 includes: [
                     //RegExp
-                    /scripts/,
-                    /scripts\\templates/,
+                    // /.*/,
+                    /tests/,
+                    // /scripts/,
+                    // /scripts\\templates/,
                 ],
                 ...params,
             });
@@ -62,7 +65,6 @@ const cli = {
     module: {
         generate: async (params = {}) => {
             await modulee.generate({
-                
                 name: "jsonplaceholder",
                 input: path.resolve("fixtures", "jsonplaceholder.har"),
                 excludeHeaders: [

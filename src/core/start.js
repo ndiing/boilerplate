@@ -11,7 +11,7 @@ async function start(server) {
         await beforeStart();
 
         await new Promise((resolve, reject) => {
-            server.on("error", reject);
+            server.once("error", reject);
             server.listen(PORT, resolve);
         });
 
